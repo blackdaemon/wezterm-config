@@ -26,7 +26,7 @@ local keys = {
       mods = 'NONE',
       action = act.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' }),
    },
-   { key = 'F11', mods = 'NONE',    action = act.ToggleFullScreen },
+   { key = 'F11', mods = 'NONE',    action = act.EmitEvent('window.toggle-fullscreen') },
    { key = 'F12', mods = 'NONE',    action = act.ShowDebugOverlay },
    { key = 'f',   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
    {
@@ -228,6 +228,15 @@ local keys = {
       }),
    },
 }
+
+for i = 1, 8 do
+  -- CTRL+ALT + number to activate that tab
+  table.insert(keys, {
+    key = tostring(i),
+    mods = 'CTRL|ALT',
+    action = act.ActivateTab(i - 1),
+  })
+end
 
 -- stylua: ignore
 ---@type table<string, Key[]>

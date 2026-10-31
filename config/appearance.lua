@@ -1,10 +1,13 @@
 local gpu_adapters = require('utils.gpu-adapter')
 local backdrops = require('utils.backdrops')
-local colors = require('colors.custom')
 
 ---@type Config
 return {
-   max_fps = 120,
+   -- predictable geometry for newly created scratch-layer windows
+   initial_cols = 174,
+   initial_rows = 56,
+
+   max_fps = 60,
    front_end = 'WebGpu', ---@type 'WebGpu' | 'OpenGL' | 'Software'
    webgpu_power_preference = 'HighPerformance',
    webgpu_preferred_adapter = gpu_adapters:pick_best(),
@@ -13,17 +16,30 @@ return {
    underline_thickness = '1.5pt',
 
    -- cursor
-   animation_fps = 120,
+   animation_fps = 60,
    cursor_blink_ease_in = 'EaseOut',
    cursor_blink_ease_out = 'EaseOut',
    default_cursor_style = 'BlinkingBlock',
    cursor_blink_rate = 650,
 
+   line_height =  1.15,
+
    -- color scheme
-   colors = colors,
+--   colors = colors,
+   color_scheme = 'Selenized Black (Gogh)', 
+   color_scheme = 'Seti UI (base16)', 
+   color_scheme = 'Cupertino (base16)', 
+   color_scheme = 'darkmoss (base16)', 
+   color_scheme = 'Classic Dark (base16)', 
+   color_scheme = 'Orangish (terminal.sexy)', 
+   color_scheme = 'Parker Brothers (terminal.sexy)', 
+   color_scheme = 'MaterialOcean', 
+   color_scheme = 'GruvboxDarkHard',
+   color_scheme = 'Atom',
+   color_scheme = 'Ayu Dark (Gogh)', 
 
    -- background: pass in `true` if you want wezterm to start with focus mode on (no bg images)
-   background = backdrops:initial_options({ no_img = false }),
+--   background = backdrops:initial_options({ no_img = false }),
 
    -- scrollbar
    enable_scroll_bar = true,
@@ -32,9 +48,36 @@ return {
    enable_tab_bar = true,
    hide_tab_bar_if_only_one_tab = false,
    use_fancy_tab_bar = false,
-   tab_max_width = 23,
+   tab_bar_at_bottom = true,
+   tab_max_width = 40,
    show_tab_index_in_tab_bar = false,
    switch_to_last_active_tab_when_closing_tab = true,
+   colors = {
+      tab_bar = {
+         background = '#111418',
+         active_tab = {
+            bg_color = '#30363d',
+            fg_color = '#e6edf3',
+            intensity = 'Normal',
+         },
+         inactive_tab = {
+            bg_color = '#1c2128',
+            fg_color = '#8b949e',
+         },
+         inactive_tab_hover = {
+            bg_color = '#252b32',
+            fg_color = '#c9d1d9',
+         },
+         new_tab = {
+            bg_color = '#111418',
+            fg_color = '#8b949e',
+         },
+         new_tab_hover = {
+            bg_color = '#252b32',
+            fg_color = '#c9d1d9',
+         },
+      },
+   },
 
    -- command palette
    command_palette_fg_color = '#b4befe',
@@ -44,8 +87,8 @@ return {
 
    -- window
    window_padding = {
-      left = 0,
-      right = 0,
+      left = 10,
+      right = 10,
       top = 10,
       bottom = 7.5,
    },
@@ -60,9 +103,10 @@ return {
    --    saturation = 0.9,
    --    brightness = 0.65,
    -- },
+   -- Keep focus visible regardless of which side owns the split/scrollbar gutter.
    inactive_pane_hsb = {
-      saturation = 1,
-      brightness = 1,
+      saturation = 0.8,
+      brightness = 0.7,
    },
 
    visual_bell = {

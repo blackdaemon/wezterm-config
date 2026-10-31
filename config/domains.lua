@@ -6,7 +6,11 @@ local options = {
    ssh_domains = {},
 
    -- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
+   -- `local` is built in; custom domains belong here.
    unix_domains = {},
+
+   -- Reattach the GUI to the persistent local mux server on launch.
+   default_gui_startup_args = { 'connect', 'local' },
 
    -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
    wsl_domains = {},

@@ -1,0 +1,1 @@
+/home/pavel/gitrepos/wezterm-theme-rotator/plugin/init.lua
