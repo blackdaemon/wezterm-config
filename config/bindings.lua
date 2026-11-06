@@ -49,6 +49,23 @@ local keys = {
          end),
       }),
    },
+   -- Alt+Ctrl+S: mark paths on screen; a label pastes the path at the cursor
+   {
+      key = 's',
+      mods = mod.SUPER_REV,
+      action = wezterm.action.QuickSelectArgs({
+         label = 'paste path',
+         patterns = {
+            '[\\w./~+-]+\\.rpm',              -- RPM files
+            '(?:~|\\.{1,2})?/[\\w./@+-]+',    -- other Unix paths
+         },
+         action = wezterm.action_callback(function(window, pane)
+            local text = window:get_selection_text_for_pane(pane)
+            window:perform_action(act.ClearSelection, pane)
+            pane:send_paste(text)
+         end),
+      }),
+   },
 
    -- cursor movement --
    { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString('\u{1b}OH') },
