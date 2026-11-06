@@ -11,6 +11,7 @@ require('events.right-status').setup({ date_format = '%a %H:%M:%S' })
 require('events.simple-tab-title').setup()
 require('events.new-tab-button').setup()
 require('events.window-resized') 
+require('events.top-zoom').setup()
 
 c = Config:init()
    :append(require('config.appearance'))

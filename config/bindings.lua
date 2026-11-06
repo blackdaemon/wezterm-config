@@ -1,6 +1,7 @@
 local wezterm = require('wezterm')
 local platform = require('utils.platform')
 local backdrops = require('utils.backdrops')
+local top_zoom = require('events.top-zoom')
 local act = wezterm.action
 
 local mod = {}
@@ -187,13 +188,14 @@ local keys = {
 
    -- panes: zoom+close pane
    { key = 'Enter', mods = mod.SUPER,     action = act.TogglePaneZoomState },
+   { key = 'Enter', mods = 'ALT|SHIFT',   action = wezterm.action_callback(top_zoom.toggle) },
    { key = 'w',     mods = mod.SUPER,     action = act.CloseCurrentPane({ confirm = false }) },
 
    -- panes: navigation
-   { key = 'k',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Up') },
-   { key = 'j',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Down') },
-   { key = 'h',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Left') },
-   { key = 'l',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Right') },
+   { key = 'k',     mods = mod.SUPER_REV, action = top_zoom.activate_direction('Up') },
+   { key = 'j',     mods = mod.SUPER_REV, action = top_zoom.activate_direction('Down') },
+   { key = 'h',     mods = mod.SUPER_REV, action = top_zoom.activate_direction('Left') },
+   { key = 'l',     mods = mod.SUPER_REV, action = top_zoom.activate_direction('Right') },
    {
       key = 'p',
       mods = mod.SUPER_REV,
